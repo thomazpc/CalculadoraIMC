@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculadora de IMC</title>
+</head>
+
+<body>
+    <h1>Calculadora de IMC</h1>
+    <form id="imc-form">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" required><br>
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" step="0.01" required><br>
+        <button type="button" onclick="calcularIMC()">Calcular IMC</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            const resultado = document.getElementById('resultado');
+
+            // Validação dos valores de entrada
+            if (isNaN(peso) || peso <= 0) {
+                resultado.innerText = "Por favor, insira um peso válido e maior que zero.";
+                return;
+            }
+            if (isNaN(altura) || altura <= 0) {
+                resultado.innerText = "Por favor, insira uma altura válida e maior que zero.";
+                return;
+            }
+
+            // Cálculo do IMC
+            const imc = (peso / (altura * altura)).toFixed(2);
+
+            // Determinação da categoria de peso
+            let mensagem = "";
+            if (imc < 18.5) {
+                mensagem = "Excelente! Você está Abaixo do peso.";
+            } else if (imc >= 18.5 && imc <= 24.9) {
+                mensagem = "Eita! Seu Peso está  normal. Continue mantendo o foco";
+            } else {
+                mensagem = "CUIDADO! Você está Acima do peso.";
+            }
+
+            // Exibição do resultado
+            resultado.innerText = `Seu IMC é ${imc}. ${mensagem}`;
+        }
+    </script>
+
+    <footer>
+        <p>Site desenvolvido por &regThomaz Pires<br>
+            Contato: <a href="mailto:thomazpires@thomazpires.com">thomaz@thomazpires.com</a></p>
+    </footer>
+</body>
+
+</html>
